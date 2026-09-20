@@ -1,0 +1,5 @@
+.DS_Store
+.build/
+.native-build/
+dist/
+release/
