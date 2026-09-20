@@ -18,4 +18,4 @@ fi
 /usr/bin/open "$DESTINATION_APP"
 
 echo "Installed: $DESTINATION_APP"
-echo "Use the app menu to enable Launch at Login if desired."
+echo "Use the app menu to enable Show After Startup if desired."

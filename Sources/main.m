@@ -814,21 +814,22 @@ static NSDateFormatter *CUBTimeFormatter(void) {
     [self.menu addItem:refresh];
 
     SMAppService *loginService = SMAppService.mainAppService;
-    NSString *loginTitle = loginService.status == SMAppServiceStatusRequiresApproval
-        ? @"登录时自动启动 · 待系统允许"
-        : @"登录时自动启动";
-    NSMenuItem *launchAtLogin = [[NSMenuItem alloc] initWithTitle:loginTitle
-                                                          action:@selector(toggleLaunchAtLogin:)
-                                                   keyEquivalent:@""];
-    launchAtLogin.target = self;
-    launchAtLogin.enabled = loginService.status != SMAppServiceStatusNotFound;
-    launchAtLogin.state = loginService.status == SMAppServiceStatusEnabled
-        ? NSControlStateValueOn
-        : (loginService.status == SMAppServiceStatusRequiresApproval
-           ? NSControlStateValueMixed
-           : NSControlStateValueOff);
-    launchAtLogin.image = CUBSymbol(@"power", 13, NSFontWeightRegular);
-    [self.menu addItem:launchAtLogin];
+    if (loginService.status != SMAppServiceStatusNotFound) {
+        NSString *loginTitle = loginService.status == SMAppServiceStatusRequiresApproval
+            ? @"开机后显示 · 需系统允许"
+            : @"开机后显示";
+        NSMenuItem *launchAtLogin = [[NSMenuItem alloc] initWithTitle:loginTitle
+                                                              action:@selector(toggleLaunchAtLogin:)
+                                                       keyEquivalent:@""];
+        launchAtLogin.target = self;
+        launchAtLogin.state = loginService.status == SMAppServiceStatusEnabled
+            ? NSControlStateValueOn
+            : (loginService.status == SMAppServiceStatusRequiresApproval
+               ? NSControlStateValueMixed
+               : NSControlStateValueOff);
+        launchAtLogin.image = CUBSymbol(@"power", 13, NSFontWeightRegular);
+        [self.menu addItem:launchAtLogin];
+    }
 
     NSMenuItem *quit = [[NSMenuItem alloc] initWithTitle:@"退出"
                                                   action:@selector(terminate:)

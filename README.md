@@ -16,7 +16,8 @@ available reset without opening the Codex app.
 - Stores the time and result of the latest manual reset locally.
 - Refreshes automatically every five minutes.
 - Uses the signed-in local Codex account; no ChatGPT token is read or stored.
-- Supports Launch at Login through the standard macOS service.
+- Optionally shows after startup through the standard macOS service; it is
+  never enabled automatically.
 
 ## Requirements
 
@@ -37,7 +38,7 @@ cd codex-usage-bar
 ```
 
 The app is built locally, copied to `/Applications/Codex Usage Bar.app`, and
-opened. Use its menu to enable **Launch at Login**.
+opened. Use its menu to enable **Show After Startup** if desired.
 
 You can also give the repository URL to Codex and ask it to clone the project,
 run `./scripts/install.sh`, verify the signature and self-test, and open the
@@ -86,13 +87,14 @@ a reset.
 - The latest manual reset result is stored only in macOS user defaults on that
   Mac and is not synchronized.
 - Consuming a reset always requires an explicit confirmation.
+- Startup launch is opt-in and is never enabled by the app automatically.
 
 The downloadable community build is ad-hoc signed and not Apple-notarized.
 Building from source is recommended until a notarized release is available.
 
 ## Uninstall
 
-Disable **Launch at Login** from the app menu, quit the app, and move
+Disable **Show After Startup** from the app menu, quit the app, and move
 `/Applications/Codex Usage Bar.app` to the Trash.
 
 ## License
